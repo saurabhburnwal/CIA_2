@@ -7,44 +7,65 @@
     <title>CoffeeHub</title>
 </head>
 <body class="bg-cyan-600 text-gray-800">
-    <nav class="bg-black flex text-white h-16 items-center justify-between px-6">
-        <ul class="flex space-x-8">
-            <li class="hover:underline cursor-pointer">Home</li>
-            <li class="hover:underline cursor-pointer">Coffee Cup</li>
-            <li class="hover:underline cursor-pointer">Contact Us</li>
+    <nav class="bg-black flex flex-col sm:flex-row text-white min-h-16 items-center justify-between px-4 sm:px-6 py-2 sm:py-0">
+        <ul class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-8 mb-2 sm:mb-0">
+            <li class="hover:underline cursor-pointer text-center sm:text-left">Home</li>
+            <li class="hover:underline cursor-pointer text-center sm:text-left">Coffee Cup</li>
+            <li class="hover:underline cursor-pointer text-center sm:text-left">Contact Us</li>
         </ul>
+        <input type="text" placeholder="Search by title..." class="text-black px-4 py-2 rounded w-full sm:w-64 max-w-xs" id="title" />
     </nav>
-    <header>
-        <h1 class="text-2xl p-4">Welcome to CoffeeHub!</h1>
-        <p class="text-lg px-4">Your one-stop shop for all things coffee.</p>
+    <div class="flex flex-col sm:flex-row justify-center gap-4 my-4 px-4">
+        <select id="sortTitle" class="px-4 py-1 rounded w-full sm:w-auto">
+            <option value="">Sort by Title</option>
+            <option value="az">A - Z</option>
+            <option value="za">Z - A</option>
+        </select>
+    </div>
+    <header class="text-center sm:text-left">
+        <h1 class="text-xl sm:text-2xl lg:text-3xl p-4">Welcome to CoffeeHub!</h1>
+        <p class="text-base sm:text-lg lg:text-xl px-4">Your one-stop shop for all things coffee.</p>
     </header>
-    <seciion class="p-4">
-        <video class="w-128 h-full" controls>
+    <section class="p-4">
+        <video class="w-full sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-2/5 h-auto mx-auto" controls>
             <source src="video/Set2_Video.mp4" type="video/mp4">
             Your browser does not support the video tag.
             <track kind="subtitles" src="video/Set2_Video.vtt" srclang="en" label="English">
         </video>
-    </seciion>
+    </section>
     <section class="p-4">
-        <audio class="mt-4" controls>
+        <audio class="mt-4 w-full sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-2/5 mx-auto block" controls>
             <source src="audio/Set2_Audio.mp3" type="audio/mp3">
             Your browser does not support the audio element.
         </audio>
-    </seciion>
-    <form class="bg-gray-100 p-6 rounded mx-auto mt-6 w-11/12 hover:border border-cyan-500 transition-transform">
-        <legend class="text-lg mb-4 text-center">Survey Form</legend>
-        <fieldset class="mb-4 flex gap-2">
-            <p>Name:</p>
-            <input type="text" placeholder="Enter your name" required>
+    </section>
+    <section class="p-4 text-center sm:text-left">
+        <h2 class="text-lg sm:text-xl lg:text-2xl font-semibold mb-2">GEOLOCATION</h2>
+        <div class="space-y-1">
+            <p>Latitude: <span id="lat"></span></p>
+            <p>Longitude: <span id="lon"></span></p>
+        </div>
+        <div id="error"></div>
+    </section>
+    <form onsubmit="getData(event)" class="bg-gray-100 p-4 sm:p-6 rounded mx-4 sm:mx-auto mt-6 w-auto sm:w-11/12 lg:w-2/3 xl:w-1/2 max-w-2xl hover:border border-cyan-500 transition-transform">
+        <legend class="text-lg sm:text-xl mb-4 text-center font-semibold">Survey Form</legend>
+        <fieldset class="mb-4 flex flex-col sm:flex-row gap-2">
+           <label for="name" class="w-full sm:w-32 font-semibold text-gray-700">Name:</label>
+            <input type="name" id="name" placeholder="Enter your name" class="flex-1 px-4 py-2 rounded border border-gray-300">
         </fieldset>
-        <fieldset class="flex gap-2 mb-4">
-            <p>Email:</p>
-            <input type="email" placeholder="Enter your email" required>
+        <fieldset class="mb-4 flex flex-col sm:flex-row gap-2">
+            <label for="email" class="w-full sm:w-32 font-semibold text-gray-700">Email:</label>
+            <input type="email" id="email" placeholder="Enter your email" class="flex-1 px-4 py-2 rounded border border-gray-300">
         </fieldset>
-        <fieldset class="flex gap-2 mb-4">
-            <p>Favourite Cofee</p>
-            <input type="text" placeholder="Enter your Favourite coffee" required>
+        <fieldset class="flex flex-col sm:flex-row gap-2 mb-4">
+            <label for="favourite" class="w-full sm:w-32 font-semibold text-gray-700">Favourite Coffee:</label>
+            <input type="text" id="favourite" placeholder="Enter your favourite coffee" class="flex-1 px-4 py-2 rounded border border-gray-300">
         </fieldset>
+        <button class="bg-blue-700 p-2 px-4 sm:px-6 text-white rounded hover:underline w-full sm:w-auto">Submit</button>
     </form>
+    <section class="flex flex-wrap justify-center gap-4 p-4" id="container">
+        
+    </section>
+    <script src="script.js"></script>
 </body>
 </html>
