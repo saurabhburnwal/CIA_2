@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Document</title>
+    <title>CoffeeHub</title>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-cyan-600 text-gray-800">
     <nav class="bg-black flex text-white h-16 items-center justify-between px-6">
         <ul class="flex space-x-8">
             <li class="hover:underline cursor-pointer">Home</li>
@@ -16,9 +16,35 @@
     </nav>
     <header>
         <h1 class="text-2xl p-4">Welcome to CoffeeHub!</h1>
-        <video controls>
-            <source src="">
-        </video>
+        <p class="text-lg px-4">Your one-stop shop for all things coffee.</p>
     </header>
+    <seciion class="p-4">
+        <video class="w-128 h-full" controls>
+            <source src="video/Set2_Video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+            <track kind="subtitles" src="video/Set2_Video.vtt" srclang="en" label="English">
+        </video>
+    </seciion>
+    <section class="p-4">
+        <audio class="mt-4" controls>
+            <source src="audio/Set2_Audio.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+    </seciion>
+    <form class="bg-gray-100 p-6 rounded mx-auto mt-6 w-11/12 hover:border border-cyan-500 transition-transform">
+        <legend class="text-lg mb-4 text-center">Survey Form</legend>
+        <fieldset class="mb-4 flex gap-2">
+            <p>Name:</p>
+            <input type="text" placeholder="Enter your name" required>
+        </fieldset>
+        <fieldset class="flex gap-2 mb-4">
+            <p>Email:</p>
+            <input type="email" placeholder="Enter your email" required>
+        </fieldset>
+        <fieldset class="flex gap-2 mb-4">
+            <p>Favourite Cofee</p>
+            <input type="text" placeholder="Enter your Favourite coffee" required>
+        </fieldset>
+    </form>
 </body>
 </html>
