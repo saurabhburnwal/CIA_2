@@ -83,7 +83,6 @@ function displayCoffee(coffeeArray) {
             <img src="${coffee.image}" alt="${coffee.title}" class="w-32 h-32 object-cover rounded mb-4">
             <h2 class="text-xl font-semibold mb-2">${coffee.title}</h2>
             <p class="text-gray-600 mb-2">${coffee.description}</p>
-            <p class="text-green-700 font-bold mb-1">Price: $${coffee.price}</p>
             <p class="text-sm text-gray-500">Ingredients: ${coffee.ingredients.join(", ")}</p>
             </div>
         `
