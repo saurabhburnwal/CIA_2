@@ -2,6 +2,39 @@ let coffeeArray = [];
 let searchInput = document.querySelector("#title");
 let sortTitle = document.querySelector("#sortTitle");
 
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const hamburgerSpans = hamburger.querySelectorAll('span');
+    
+    hamburger.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+        
+        if (mobileMenu.classList.contains('hidden')) {
+            hamburgerSpans[0].style.transform = 'rotate(0deg)';
+            hamburgerSpans[1].style.opacity = '1';
+            hamburgerSpans[2].style.transform = 'rotate(0deg)';
+        } else {
+            hamburgerSpans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+            hamburgerSpans[1].style.opacity = '0';
+            hamburgerSpans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+        }
+    });
+    
+    const titleMobile = document.querySelector("#titleMobile");
+    if (titleMobile) {
+        searchInput.addEventListener('input', function() {
+            titleMobile.value = this.value;
+            filterAndSort();
+        });
+        
+        titleMobile.addEventListener('input', function() {
+            searchInput.value = this.value;
+            filterAndSort();
+        });
+    }
+});
+
 function getData(event) {
     event.preventDefault();
     let name = document.querySelector("#name").value
@@ -61,11 +94,78 @@ window.onload = function() {
         }
 }
 
-fetch("https://api.sampleapis.com/coffee/hot")
+fetch("https://fake-coffee-api.vercel.app/api")
     .then(response => response.json())
     .then(data => {
         coffeeArray = data.slice(0, 8)
         displayCoffee(coffeeArray)
+    })
+    .catch(error => {
+        console.log("Primary API failed, trying backup...");
+        return fetch("https://api.jsonbin.io/v3/b/63c872c815ab31599e2d4f8a")
+            .then(response => response.json())
+            .then(data => {
+                const coffeeData = [
+                    {
+                        id: 1,
+                        title: "Espresso",
+                        description: "A strong black coffee made by forcing steam through ground coffee beans.",
+                        image: "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400",
+                        ingredients: ["Espresso beans", "Water"]
+                    },
+                    {
+                        id: 2,
+                        title: "Cappuccino",
+                        description: "Espresso with steamed milk foam on top.",
+                        image: "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400",
+                        ingredients: ["Espresso", "Steamed milk", "Milk foam"]
+                    },
+                    {
+                        id: 3,
+                        title: "Latte",
+                        description: "Espresso with steamed milk and a small amount of milk foam.",
+                        image: "https://images.unsplash.com/photo-1561047029-3000c68339ca?w=400",
+                        ingredients: ["Espresso", "Steamed milk", "Milk foam"]
+                    },
+                    {
+                        id: 4,
+                        title: "Americano",
+                        description: "Espresso diluted with hot water.",
+                        image: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=400",
+                        ingredients: ["Espresso", "Hot water"]
+                    },
+                    {
+                        id: 5,
+                        title: "Mocha",
+                        description: "Espresso with chocolate syrup and steamed milk.",
+                        image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400",
+                        ingredients: ["Espresso", "Chocolate syrup", "Steamed milk", "Whipped cream"]
+                    },
+                    {
+                        id: 6,
+                        title: "Macchiato",
+                        description: "Espresso with a dollop of steamed milk foam.",
+                        image: "https://images.unsplash.com/photo-1459755486867-b55449bb39ff?w=400",
+                        ingredients: ["Espresso", "Steamed milk foam"]
+                    },
+                    {
+                        id: 7,
+                        title: "Frappé",
+                        description: "Iced coffee drink blended with ice and milk.",
+                        image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400",
+                        ingredients: ["Coffee", "Ice", "Milk", "Sugar"]
+                    },
+                    {
+                        id: 8,
+                        title: "Cold Brew",
+                        description: "Coffee brewed with cold water over an extended period.",
+                        image: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=400",
+                        ingredients: ["Coarse ground coffee", "Cold water"]
+                    }
+                ];
+                coffeeArray = coffeeData;
+                displayCoffee(coffeeArray);
+            });
     })
     .catch(error => {
         alert("Failed to fetch coffee data. Please try again later.");
